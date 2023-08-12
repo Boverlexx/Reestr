@@ -9,6 +9,8 @@ from PySide6.QtGui import QMovie
 
 
 
+
+
 class MyProxyStyle(QProxyStyle):
     def pixelMetric(self, QStyle_PixelMetric, option=None, widget=None):
 
