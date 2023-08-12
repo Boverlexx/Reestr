@@ -262,51 +262,50 @@ class DengyApp(QtWidgets.QMainWindow, Ui_Dengy):
                         summ_all.append(zam)
                         # print('%s: cell.value=%s' % (cell, cell.value))
                 # print('Проверка 1: ', summ_all)
-
                 i = 0
                 new_bill = []
                 for score in score_all:
                     new_bill.append([score, summ_all[i]])
                     i+=1
             #
-                print(new_bill)
+                # print(new_bill)
+
+                # Находим дубликаты в списке
+                dup = [x for i, x in enumerate(score_all) if i != score_all.index(x) and len(score_all[i])>15]
+                print(dup)  # [1, 5, 1]
             #
-            #     # Находим дубликаты в списке
-            #     dup = [x for i, x in enumerate(score_all) if i != score_all.index(x) and len(score_all[i])>15]
-            #     # print(dup)  # [1, 5, 1]
-            #
-            #     dup_new = []
-            #     for i in dup:
-            #        dup_new.append([i,777])
-            #
-            #     # print(new_bill)
-            #     for t in dup_new:
-            #         for j in new_bill:
-            #             if j[0] == t[0] and t[1] == 777:
-            #                 t[1] = j[1]
-            #             elif j[0] == t[0] and t[1] != 777:
-            #                 t[1] = round(t[1] + j[1], 2)
-            #
-            #     for k in dup:
-            #         for j in new_bill:
-            #             if k == j[0]:
-            #                 new_bill.pop(new_bill.index(j))
-            #     for k in dup:
-            #         for j in new_bill:
-            #             if k == j[0]:
-            #                 new_bill.pop(new_bill.index(j))
-            #
-            #     for k in dup_new:
-            #         for s in new_bill:
-            #             if k[0] == s[0]:
-            #                 pass
-            #             else:
-            #                 new_bill.append(k)
-            #             break
-            #     wb.close()
-            # except:
-            #     self.ui.label_info.setText('Проверте веденные данные по ведомости.')
-            #
+                dup_new = []
+                for i in dup:
+                   dup_new.append([i,777])
+
+                # print(new_bill)
+                for t in dup_new:
+                    for j in new_bill:
+                        if j[0] == t[0] and t[1] == 777:
+                            t[1] = j[1]
+                        elif j[0] == t[0] and t[1] != 777:
+                            t[1] = round(t[1] + j[1], 2)
+
+                for k in dup:
+                    for j in new_bill:
+                        if k == j[0]:
+                            new_bill.pop(new_bill.index(j))
+                for k in dup:
+                    for j in new_bill:
+                        if k == j[0]:
+                            new_bill.pop(new_bill.index(j))
+
+                for k in dup_new:
+                    for s in new_bill:
+                        if k[0] == s[0]:
+                            pass
+                        else:
+                            new_bill.append(k)
+                        break
+                wb.close()
+            except:
+                self.ui.label_info.setText('Проверте веденные данные по ведомости.')
+
             # self.ui.label_info_4.clear()
             # column_start_reestr = self.ui.spinBox_column_start_11.value()
             # column_start_reestr_2 = self.ui.spinBox_column_start_12.value()
@@ -369,8 +368,8 @@ class DengyApp(QtWidgets.QMainWindow, Ui_Dengy):
             #                 pass
             #
             #         wb1.save(self.file_reestr)
-            except:
-                self.ui.label_info_4.setText('Проверте веденные данные веденные по реестру.')
+            # except:
+            #     self.ui.label_info_4.setText('Проверте веденные данные веденные по реестру.')
 
 
 
