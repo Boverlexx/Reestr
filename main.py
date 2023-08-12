@@ -226,8 +226,8 @@ class DengyApp(QtWidgets.QMainWindow, Ui_Dengy):
         self.ui.label_info_5.clear()
         column_start = self.ui.spinBox_column_start_15.value()
         column_start_2 = self.ui.spinBox_column_start_16.value()
-        row_start = self.ui.spinBox_row_start_4.value()
-        row_finish = self.ui.spinBox_row_finish_4.value()
+        row_start = self.ui.spinBox_row_start_8.value()
+        row_finish = self.ui.spinBox_row_finish_8.value()
         name_book = self.ui.lineEdit_book_6.text()
 
         if column_start == 0:
@@ -242,7 +242,7 @@ class DengyApp(QtWidgets.QMainWindow, Ui_Dengy):
             self.ui.label_info_5.setText('Введите имя книги в ведомости.')
         else:
             try:
-                wb = xl.load_workbook(self.file_reestr_1v, keep_vba=True, data_only=True)
+                wb = xl.load_workbook(self.file_reestr_1, keep_vba=True, data_only=True)
                 wb.active = wb[name_book]
                 ws = wb.active
                 # # Выбираем все № счетов
@@ -254,21 +254,22 @@ class DengyApp(QtWidgets.QMainWindow, Ui_Dengy):
                         score_all.append(cell.value)
                         # print('%s: cell.value=%s' % (cell, cell.value))
                 # print('Проверка 1: ', score_all)
-                # for col_cells in ws.iter_cols(min_row=row_start, max_row=row_finish, min_col=column_start_2,
-                #                                      max_col=column_start_2):
-            #         for cell in col_cells:
-            #             rd = round(cell.value,2)
-            #             summ_all.append(rd)
-            #             # print('%s: cell.value=%s' % (cell, cell.value))
-            #     # print('Проверка 1: ', summ_all)
+                for col_cells in ws.iter_cols(min_row=row_start, max_row=row_finish, min_col=column_start_2,
+                                                     max_col=column_start_2):
+                    for cell in col_cells:
+                        ch = str(cell.value)
+                        zam = ch.replace(".", ",")
+                        summ_all.append(zam)
+                        # print('%s: cell.value=%s' % (cell, cell.value))
+                # print('Проверка 1: ', summ_all)
+
+                i = 0
+                new_bill = []
+                for score in score_all:
+                    new_bill.append([score, summ_all[i]])
+                    i+=1
             #
-            #     i = 0
-            #     new_bill = []
-            #     for score in score_all:
-            #         new_bill.append([score, summ_all[i]])
-            #         i+=1
-            #
-            #     # print(score_all)
+                print(new_bill)
             #
             #     # Находим дубликаты в списке
             #     dup = [x for i, x in enumerate(score_all) if i != score_all.index(x) and len(score_all[i])>15]
