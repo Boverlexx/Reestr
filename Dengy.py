@@ -84,7 +84,25 @@ class Ui_Dengy(object):
         font1.setPointSize(12)
         self.pushButton_open_ved.setFont(font1)
         self.pushButton_open_ved.setLayoutDirection(Qt.LeftToRight)
-        self.pushButton_open_ved.setStyleSheet(u"background-color: rgb(170, 255, 127);")
+        self.pushButton_open_ved.setStyleSheet(u"\n"
+"QPushButton\n"
+"{\n"
+"background-color: rgb(170, 255, 127);\n"
+"}\n"
+"QPushButton:pressed\n"
+"{\n"
+"	background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:1 rgba(0, 26, 255, 113));\n"
+"    border-style: ridge;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;     \n"
+"}\n"
+"QPushButton:hover:!pressed\n"
+"{\n"
+"	background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:1 rgba(0, 88, 248, 77));\n"
+"    border-style: ridge;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;	\n"
+"}")
 
         self.verticalLayout_5.addWidget(self.pushButton_open_ved, 0, Qt.AlignHCenter)
 
@@ -301,7 +319,26 @@ class Ui_Dengy(object):
         self.pushButton_open_reestr.setMaximumSize(QSize(122, 27))
         self.pushButton_open_reestr.setFont(font1)
         self.pushButton_open_reestr.setLayoutDirection(Qt.LeftToRight)
-        self.pushButton_open_reestr.setStyleSheet(u"background-color: rgb(255, 92, 28);")
+        self.pushButton_open_reestr.setStyleSheet(u"\n"
+"\n"
+"QPushButton\n"
+"{\n"
+"background-color: rgb(255, 92, 28);\n"
+"}\n"
+"QPushButton:pressed\n"
+"{\n"
+"	background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:1 rgba(0, 26, 255, 113));\n"
+"    border-style: ridge;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;     \n"
+"}\n"
+"QPushButton:hover:!pressed\n"
+"{\n"
+"	background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:1 rgba(0, 88, 248, 77));\n"
+"    border-style: ridge;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;	\n"
+"}")
 
         self.verticalLayout_6.addWidget(self.pushButton_open_reestr, 0, Qt.AlignHCenter)
 
@@ -502,6 +539,23 @@ class Ui_Dengy(object):
         self.pushButton_vnesti.setMinimumSize(QSize(120, 27))
         self.pushButton_vnesti.setMaximumSize(QSize(120, 27))
         self.pushButton_vnesti.setFont(font1)
+        self.pushButton_vnesti.setStyleSheet(u"QPushButton\n"
+"{\n"
+"}\n"
+"QPushButton:pressed\n"
+"{\n"
+"	background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:1 rgba(0, 26, 255, 113));\n"
+"    border-style: ridge;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;     \n"
+"}\n"
+"QPushButton:hover:!pressed\n"
+"{\n"
+"	background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:1 rgba(0, 88, 248, 77));\n"
+"    border-style: ridge;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;	\n"
+"}")
 
         self.horizontalLayout.addWidget(self.pushButton_vnesti)
 
@@ -512,6 +566,23 @@ class Ui_Dengy(object):
         self.pushButton_cancel.setMinimumSize(QSize(120, 27))
         self.pushButton_cancel.setMaximumSize(QSize(120, 27))
         self.pushButton_cancel.setFont(font1)
+        self.pushButton_cancel.setStyleSheet(u"QPushButton\n"
+"{\n"
+"}\n"
+"QPushButton:pressed\n"
+"{\n"
+"	background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:1 rgba(0, 26, 255, 113));\n"
+"    border-style: ridge;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;     \n"
+"}\n"
+"QPushButton:hover:!pressed\n"
+"{\n"
+"	background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:1 rgba(0, 88, 248, 77));\n"
+"    border-style: ridge;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;	\n"
+"}")
 
         self.horizontalLayout.addWidget(self.pushButton_cancel)
 
@@ -552,7 +623,25 @@ class Ui_Dengy(object):
         self.pushButton_open_ved_3.setMaximumSize(QSize(122, 27))
         self.pushButton_open_ved_3.setFont(font1)
         self.pushButton_open_ved_3.setLayoutDirection(Qt.LeftToRight)
-        self.pushButton_open_ved_3.setStyleSheet(u"background-color: rgb(170, 255, 127);")
+        self.pushButton_open_ved_3.setStyleSheet(u"\n"
+"QPushButton\n"
+"{\n"
+"background-color: rgb(170, 255, 127);\n"
+"}\n"
+"QPushButton:pressed\n"
+"{\n"
+"	background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:1 rgba(0, 26, 255, 113));\n"
+"    border-style: ridge;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;     \n"
+"}\n"
+"QPushButton:hover:!pressed\n"
+"{\n"
+"	background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:1 rgba(0, 88, 248, 77));\n"
+"    border-style: ridge;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;	\n"
+"}")
 
         self.verticalLayout_21.addWidget(self.pushButton_open_ved_3, 0, Qt.AlignHCenter)
 
@@ -760,7 +849,26 @@ class Ui_Dengy(object):
         self.pushButton_open_reestr1_3.setMaximumSize(QSize(122, 27))
         self.pushButton_open_reestr1_3.setFont(font1)
         self.pushButton_open_reestr1_3.setLayoutDirection(Qt.LeftToRight)
-        self.pushButton_open_reestr1_3.setStyleSheet(u"background-color: rgb(255, 92, 28);")
+        self.pushButton_open_reestr1_3.setStyleSheet(u"\n"
+"\n"
+"QPushButton\n"
+"{\n"
+"background-color: rgb(255, 92, 28);\n"
+"}\n"
+"QPushButton:pressed\n"
+"{\n"
+"	background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:1 rgba(0, 26, 255, 113));\n"
+"    border-style: ridge;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;     \n"
+"}\n"
+"QPushButton:hover:!pressed\n"
+"{\n"
+"	background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:1 rgba(0, 88, 248, 77));\n"
+"    border-style: ridge;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;	\n"
+"}")
 
         self.verticalLayout_26.addWidget(self.pushButton_open_reestr1_3, 0, Qt.AlignHCenter)
 
@@ -957,6 +1065,24 @@ class Ui_Dengy(object):
         self.pushButton_vnesti_3.setMinimumSize(QSize(120, 27))
         self.pushButton_vnesti_3.setMaximumSize(QSize(120, 27))
         self.pushButton_vnesti_3.setFont(font1)
+        self.pushButton_vnesti_3.setStyleSheet(u"QPushButton\n"
+"{\n"
+"}\n"
+"QPushButton:pressed\n"
+"{\n"
+"	background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:1 rgba(0, 26, 255, 113));\n"
+"    border-style: ridge;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;     \n"
+"}\n"
+"QPushButton:hover:!pressed\n"
+"{\n"
+"	background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:1 rgba(0, 88, 248, 77));\n"
+"    border-style: ridge;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;	\n"
+"}\n"
+"")
 
         self.horizontalLayout_18.addWidget(self.pushButton_vnesti_3)
 
@@ -967,6 +1093,23 @@ class Ui_Dengy(object):
         self.pushButton_cancel_3.setMinimumSize(QSize(120, 27))
         self.pushButton_cancel_3.setMaximumSize(QSize(120, 27))
         self.pushButton_cancel_3.setFont(font1)
+        self.pushButton_cancel_3.setStyleSheet(u"QPushButton\n"
+"{\n"
+"}\n"
+"QPushButton:pressed\n"
+"{\n"
+"	background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:1 rgba(0, 26, 255, 113));\n"
+"    border-style: ridge;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;     \n"
+"}\n"
+"QPushButton:hover:!pressed\n"
+"{\n"
+"	background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:1 rgba(0, 88, 248, 77));\n"
+"    border-style: ridge;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;	\n"
+"}")
 
         self.horizontalLayout_18.addWidget(self.pushButton_cancel_3)
 
