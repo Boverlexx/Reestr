@@ -31,20 +31,12 @@ class DengyApp(QtWidgets.QMainWindow, Ui_Dengy):
 
         self.ui.tableWidget_kassa.setColumnWidth(0,220)
         self.ui.tableWidget_kassa.setColumnWidth(1,200)
-        self.ui.tableWidget_kassa.setColumnWidth(2,110)
+        self.ui.tableWidget_kassa.setColumnWidth(2,100)
         self.ui.pushButton_save_exel.clicked.connect(self.save)
 
 
     def save(self):
         pass
-        # data = [['Абидина Анастасия Михайловна', 'Ведущий специалист отдела инфраструктуры', '67101.2'], ['Бронников Дмитрий Александрович', 'ведущий специалист отдела ГО и ЧС', '15976.86'], ['Воскобойник Александр Павлович', 'Ведущий специалист отдела по делам молодежной политики, культуры, спорта и туризма', '28757.94'], ['Кица Сергей Николаевич', 'Охраник', '18644.29'], ['Коваленко Алексей Сергеевич', 'Специалист 1 категории сектора гуманитарной помощи', '39961.4'], ['Козаков Александр Николаевич', 'Главный специалист хозяйственного отдела', '14739.6'], ['Кушнаренко Андрей Валентинович', 'Главный специалист инфраструктуры', '77380.4'], ['Леонов Иван Юрьевич', 'Водитель', '27671'], ['Луганская -Кузина Марина Александровна', 'Отдел по социальным вопросам.Главный специалист', '-12109.88'], ['Питомец Владислав Иванович', 'Водитель', '25035.86'], ['Саркисян Ирина Рафаиловна', 'Специалист 1 категории сектора гум помощи', '59941.19'], ['Терехов Алексей Анатольевич', 'Охранник', '26102.4'], ['Шевцова Ольга Анатольевна', 'Специалист 1 категории сектора гум помощи', '19980.06']]
-        #
-        # for row in range(len(data)):
-        #     self.ui.tableWidget_kassa.setRowCount(len(data))
-        #     for column in range(len(data[row])):
-        #         item = QtWidgets.QTableWidgetItem()
-        #         item.setText(data[row][column])
-        #         self.ui.tableWidget_kassa.setItem(row, column, item)
 
     def open_vedomost(self):
         try:
@@ -116,7 +108,7 @@ class DengyApp(QtWidgets.QMainWindow, Ui_Dengy):
                     # part.append(ws[part[1]].value)
                     # print(ws.cell(row=part[2], column=25).value)
 
-                print(data)
+                # print(data)
 
                 for row in range(len(data)):
                     self.ui.tableWidget_kassa.setRowCount(len(data)+1)
