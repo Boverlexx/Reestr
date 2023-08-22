@@ -3,8 +3,9 @@ import openpyxl as xl
 import re
 from Dengy import Ui_Dengy  # Это наш конвертированный файл дизайна
 from PySide6 import QtWidgets, QtCore
-from PySide6.QtWidgets import QProxyStyle, QStyle, QMessageBox, QWidget, QLabel, QVBoxLayout
+from PySide6.QtWidgets import QProxyStyle, QStyle, QMessageBox, QWidget, QLabel, QVBoxLayout, QStyledItemDelegate
 from PySide6.QtCore import Qt
+from  PySide6.QtGui import QFont
 
 class MyProxyStyle(QProxyStyle):
     def pixelMetric(self, QStyle_PixelMetric, option=None, widget=None):
@@ -30,7 +31,7 @@ class DengyApp(QtWidgets.QMainWindow, Ui_Dengy):
 
         self.ui.tableWidget_kassa.setColumnWidth(0,220)
         self.ui.tableWidget_kassa.setColumnWidth(1,200)
-        self.ui.tableWidget_kassa.setColumnWidth(2,150)
+        self.ui.tableWidget_kassa.setColumnWidth(2,110)
         self.ui.pushButton_save_exel.clicked.connect(self.save)
 
 
@@ -103,7 +104,9 @@ class DengyApp(QtWidgets.QMainWindow, Ui_Dengy):
                 # ИЮЛЬ2023 Sheet0
 
                 scor_coord_new = []
+                itog = 0
                 for coord in scor_coord:
+                    itog += coord[3]
                     scor_coord_new.append([coord[0], 'C' + coord[1][1:], 'D' + coord[1][1:], coord[2], coord[3]])
 
                 # print(scor_coord_new)
@@ -120,7 +123,16 @@ class DengyApp(QtWidgets.QMainWindow, Ui_Dengy):
                     for column in range(len(data[row])):
                         item = QtWidgets.QTableWidgetItem()
                         item.setText(data[row][column])
+                        item.setFont(QFont('Times', 10))
                         self.ui.tableWidget_kassa.setItem(row, column, item)
+                item2 = QtWidgets.QTableWidgetItem('ИТОГО:')
+                item2.setFont(QFont('Times', 11, QFont.Black))
+                item2.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter | Qt.AlignRight)
+                self.ui.tableWidget_kassa.setItem(row+1, column-1, item2)
+                item3 = QtWidgets.QTableWidgetItem(str(itog))
+                item3.setFont(QFont('Times', 11, QFont.Black))
+                self.ui.tableWidget_kassa.setItem(row+1, column, item3)
+
 
                 # Выбираем все № счетов
                 score_all = []
