@@ -4,10 +4,7 @@ import re
 from Dengy import Ui_Dengy  # Это наш конвертированный файл дизайна
 from PySide6 import QtWidgets, QtCore
 from PySide6.QtWidgets import QProxyStyle, QStyle, QMessageBox, QWidget, QLabel, QVBoxLayout
-from PySide6.QtCore import QThread, Signal, Qt
-from PySide6.QtGui import QMovie
-
-
+from PySide6.QtCore import Qt
 
 class MyProxyStyle(QProxyStyle):
     def pixelMetric(self, QStyle_PixelMetric, option=None, widget=None):
@@ -31,6 +28,23 @@ class DengyApp(QtWidgets.QMainWindow, Ui_Dengy):
         self.ui.pushButton_open_reestr1_3.clicked.connect(self.open_reestr_2)
         self.ui.pushButton_vnesti_3.clicked.connect(self.runing_2)
 
+        self.ui.tableWidget_kassa.setColumnWidth(0,220)
+        self.ui.tableWidget_kassa.setColumnWidth(1,200)
+        self.ui.tableWidget_kassa.setColumnWidth(2,150)
+        self.ui.pushButton_save_exel.clicked.connect(self.save)
+
+
+    def save(self):
+        pass
+        # data = [['Абидина Анастасия Михайловна', 'Ведущий специалист отдела инфраструктуры', '67101.2'], ['Бронников Дмитрий Александрович', 'ведущий специалист отдела ГО и ЧС', '15976.86'], ['Воскобойник Александр Павлович', 'Ведущий специалист отдела по делам молодежной политики, культуры, спорта и туризма', '28757.94'], ['Кица Сергей Николаевич', 'Охраник', '18644.29'], ['Коваленко Алексей Сергеевич', 'Специалист 1 категории сектора гуманитарной помощи', '39961.4'], ['Козаков Александр Николаевич', 'Главный специалист хозяйственного отдела', '14739.6'], ['Кушнаренко Андрей Валентинович', 'Главный специалист инфраструктуры', '77380.4'], ['Леонов Иван Юрьевич', 'Водитель', '27671'], ['Луганская -Кузина Марина Александровна', 'Отдел по социальным вопросам.Главный специалист', '-12109.88'], ['Питомец Владислав Иванович', 'Водитель', '25035.86'], ['Саркисян Ирина Рафаиловна', 'Специалист 1 категории сектора гум помощи', '59941.19'], ['Терехов Алексей Анатольевич', 'Охранник', '26102.4'], ['Шевцова Ольга Анатольевна', 'Специалист 1 категории сектора гум помощи', '19980.06']]
+        #
+        # for row in range(len(data)):
+        #     self.ui.tableWidget_kassa.setRowCount(len(data))
+        #     for column in range(len(data[row])):
+        #         item = QtWidgets.QTableWidgetItem()
+        #         item.setText(data[row][column])
+        #         self.ui.tableWidget_kassa.setItem(row, column, item)
+
     def open_vedomost(self):
         try:
             file = QtWidgets.QFileDialog.getOpenFileName(self, "Выбрать ведомость", " ", "All (*);;Excel (*.xlsx)",
@@ -50,6 +64,7 @@ class DengyApp(QtWidgets.QMainWindow, Ui_Dengy):
             self.ui.textEdit_2.setText(self.file_reestr)
         except AttributeError:
             self.ui.label_info.setText('Выберите файл для анализа.')
+
     # Выбираем данные из ведомости и переносим в реестр
     def runing(self):
         self.ui.label_info.clear()
@@ -61,20 +76,53 @@ class DengyApp(QtWidgets.QMainWindow, Ui_Dengy):
 
         if column_start == 0:
             self.ui.label_info.setText('Введите № начальной колонки для № счетов.')
-        if column_start_2 == 0:
-            self.ui.label_info.setText('Введите № начальной колонки для сумм.')
-        elif row_start == 0:
-            self.ui.label_info.setText('Введите № начальной строки для расчёта.')
-        elif row_finish == 0:
-            self.ui.label_info.setText('Введите № конечной строки для расчёта.')
-        elif name_book == '':
-            self.ui.label_info.setText('Введите имя книги в ведомости.')
+        # if column_start_2 == 0:
+        #     self.ui.label_info.setText('Введите № начальной колонки для сумм.')
+        # elif row_start == 0:
+        #     self.ui.label_info.setText('Введите № начальной строки для расчёта.')
+        # elif row_finish == 0:
+        #     self.ui.label_info.setText('Введите № конечной строки для расчёта.')
+        # elif name_book == '':
+        #     self.ui.label_info.setText('Введите имя книги в ведомости.')
         else:
             try:
                 wb = xl.load_workbook(self.file, keep_vba=True, data_only=True)
                 wb.active = wb[name_book]
                 ws = wb.active
-                # # Выбираем все № счетов
+
+                scor_coord = []
+
+                for col_cells in ws.iter_cols(min_row=row_start, max_row=row_finish, min_col=column_start,
+                                              max_col=column_start_2):
+                    for cell in col_cells:
+                        if cell.value == '0':
+                            summ = ws.cell(row=cell.row, column=column_start_2).value
+                            scor_coord.append([cell.value, cell.coordinate, cell.row, round(summ, 2)])
+                        # score_all.append(cell.value)
+                        # print('%s: cell.value=%s' % (cell, cell.value))
+                # ИЮЛЬ2023 Sheet0
+
+                scor_coord_new = []
+                for coord in scor_coord:
+                    scor_coord_new.append([coord[0], 'C' + coord[1][1:], 'D' + coord[1][1:], coord[2], coord[3]])
+
+                # print(scor_coord_new)
+                data = []
+                for part in scor_coord_new:
+                    data.append([ws[part[1]].value, ws[part[2]].value, str(part[4])])
+                    # part.append(ws[part[1]].value)
+                    # print(ws.cell(row=part[2], column=25).value)
+
+                print(data)
+
+                for row in range(len(data)):
+                    self.ui.tableWidget_kassa.setRowCount(len(data)+1)
+                    for column in range(len(data[row])):
+                        item = QtWidgets.QTableWidgetItem()
+                        item.setText(data[row][column])
+                        self.ui.tableWidget_kassa.setItem(row, column, item)
+
+                # Выбираем все № счетов
                 score_all = []
                 summ_all = []
                 for col_cells in ws.iter_cols(min_row=row_start, max_row=row_finish, min_col=column_start,
@@ -136,73 +184,71 @@ class DengyApp(QtWidgets.QMainWindow, Ui_Dengy):
             except:
                 self.ui.label_info.setText('Проверте веденные данные по ведомости.')
 
-            self.ui.label_info_4.clear()
-            column_start_reestr = self.ui.spinBox_column_start_11.value()
-            column_start_reestr_2 = self.ui.spinBox_column_start_12.value()
-            row_start_reestr = self.ui.spinBox_row_start_6.value()
-            row_finish_reestr = self.ui.spinBox_row_finish_6.value()
-            name_book_reestr = self.ui.lineEdit_book_3.text()
-
-            if column_start_reestr == 0:
-                self.ui.label_info_4.setText('Введите № начальной колонки для № счетов.')
-            if column_start_reestr_2 == 0:
-                self.ui.label_info_4.setText('Введите № начальной колонки для сумм.')
-            elif row_start_reestr == 0:
-                self.ui.label_info_4.setText('Введите № начальной строки для расчёта.')
-            elif row_finish_reestr == 0:
-                self.ui.label_info_4.setText('Введите № конечной строки для расчёта.')
-            elif name_book_reestr == '':
-                self.ui.label_info_4.setText('Введите имя книги в реестре.')
-            else:
-                try:
-                    wb1 = xl.load_workbook(self.file_reestr)
-                    # print(wb1.sheetnames)
-                    wb1.active = wb1[name_book_reestr]
-                    ws2 = wb1.active
-                    # # Выбираем все № счетов
-
-                    score = []
-                    coord = []
-
-                    for col_cells in ws2.iter_cols(min_row=row_start_reestr, max_row=row_finish_reestr,
-                                                   min_col=column_start_reestr, max_col=column_start_reestr):
-                        for cell in col_cells:
-                            score.append([cell.value])
-
-                    for col_cells in ws2.iter_cols(min_row=row_start_reestr, max_row=row_finish_reestr,
-                                                           min_col=column_start_reestr_2, max_col=column_start_reestr_2):
-                        for cell in col_cells:
-                            coord.append(cell.coordinate)
-
-                    reestr1 = []
-                    t = 0
-                    for i in score:
-                        reestr1.append([i[0], coord[t]])
-                        t += 1
-
-
-                    for re in reestr1:
-                        for d in new_bill:
-                            if re[0] == d[0]:
-                                # print(d[1])
-                                # print(re)
-                                re.append(d[1])
-                    # print(reestr1)
-
-                    for i in reestr1:
-                        try:
-                            ch = str(i[2])
-                            zam = ch.replace(",", ".")
-                            ws2[i[1]] = zam
-                        except IndexError:
-                            pass
-
-                    wb1.save(self.file_reestr)
-                    self.ui.label_info_4.setText('Данные успешно внесены!')
-                except:
-                    self.ui.label_info_4.setText('Проверте веденные данные веденные по реестру.')
-
-
+            # self.ui.label_info_4.clear()
+            # column_start_reestr = self.ui.spinBox_column_start_11.value()
+            # column_start_reestr_2 = self.ui.spinBox_column_start_12.value()
+            # row_start_reestr = self.ui.spinBox_row_start_6.value()
+            # row_finish_reestr = self.ui.spinBox_row_finish_6.value()
+            # name_book_reestr = self.ui.lineEdit_book_3.text()
+            #
+            # if column_start_reestr == 0:
+            #     self.ui.label_info_4.setText('Введите № начальной колонки для № счетов.')
+            # if column_start_reestr_2 == 0:
+            #     self.ui.label_info_4.setText('Введите № начальной колонки для сумм.')
+            # elif row_start_reestr == 0:
+            #     self.ui.label_info_4.setText('Введите № начальной строки для расчёта.')
+            # elif row_finish_reestr == 0:
+            #     self.ui.label_info_4.setText('Введите № конечной строки для расчёта.')
+            # elif name_book_reestr == '':
+            #     self.ui.label_info_4.setText('Введите имя книги в реестре.')
+            # else:
+            #     try:
+            #         wb1 = xl.load_workbook(self.file_reestr)
+            #         # print(wb1.sheetnames)
+            #         wb1.active = wb1[name_book_reestr]
+            #         ws2 = wb1.active
+            #         # # Выбираем все № счетов
+            #
+            #         score = []
+            #         coord = []
+            #
+            #         for col_cells in ws2.iter_cols(min_row=row_start_reestr, max_row=row_finish_reestr,
+            #                                        min_col=column_start_reestr, max_col=column_start_reestr):
+            #             for cell in col_cells:
+            #                 score.append([cell.value])
+            #
+            #         for col_cells in ws2.iter_cols(min_row=row_start_reestr, max_row=row_finish_reestr,
+            #                                                min_col=column_start_reestr_2, max_col=column_start_reestr_2):
+            #             for cell in col_cells:
+            #                 coord.append(cell.coordinate)
+            #
+            #         reestr1 = []
+            #         t = 0
+            #         for i in score:
+            #             reestr1.append([i[0], coord[t]])
+            #             t += 1
+            #
+            #
+            #         for re in reestr1:
+            #             for d in new_bill:
+            #                 if re[0] == d[0]:
+            #                     # print(d[1])
+            #                     # print(re)
+            #                     re.append(d[1])
+            #         # print(reestr1)
+            #
+            #         for i in reestr1:
+            #             try:
+            #                 ch = str(i[2])
+            #                 zam = ch.replace(",", ".")
+            #                 ws2[i[1]] = zam
+            #             except IndexError:
+            #                 pass
+            #
+            #         wb1.save(self.file_reestr)
+            #         self.ui.label_info_4.setText('Данные успешно внесены!')
+            #     except:
+            #         self.ui.label_info_4.setText('Проверте веденные данные веденные по реестру.')
     def open_vedomost_2(self):
         try:
             file = QtWidgets.QFileDialog.getOpenFileName(self, "Выбрать ведомость", " ", "All (*);;Excel (*.xlsx)",

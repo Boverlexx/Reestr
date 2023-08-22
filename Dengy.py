@@ -16,9 +16,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QGroupBox, QHBoxLayout,
-    QLabel, QLineEdit, QMainWindow, QMenuBar,
-    QPushButton, QSizePolicy, QSpinBox, QStatusBar,
-    QTabWidget, QTextEdit, QVBoxLayout, QWidget)
+    QHeaderView, QLabel, QLineEdit, QMainWindow,
+    QMenuBar, QPushButton, QSizePolicy, QSpinBox,
+    QStatusBar, QTabWidget, QTableWidget, QTableWidgetItem,
+    QTextEdit, QVBoxLayout, QWidget)
 
 class Ui_Dengy(object):
     def setupUi(self, Dengy):
@@ -31,7 +32,7 @@ class Ui_Dengy(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(Dengy.sizePolicy().hasHeightForWidth())
         Dengy.setSizePolicy(sizePolicy)
-        Dengy.setMinimumSize(QSize(518, 570))
+        Dengy.setMinimumSize(QSize(518, 613))
         Dengy.setMaximumSize(QSize(518, 613))
         icon = QIcon()
         icon.addFile(u"Image/russian.ico", QSize(), QIcon.Normal, QIcon.Off)
@@ -45,8 +46,8 @@ class Ui_Dengy(object):
         self.centralwidget.setSizePolicy(sizePolicy1)
         self.centralwidget.setMinimumSize(QSize(400, 570))
         self.centralwidget.setMaximumSize(QSize(518, 600))
-        self.verticalLayout_28 = QVBoxLayout(self.centralwidget)
-        self.verticalLayout_28.setObjectName(u"verticalLayout_28")
+        self.verticalLayout_11 = QVBoxLayout(self.centralwidget)
+        self.verticalLayout_11.setObjectName(u"verticalLayout_11")
         self.tabWidget = QTabWidget(self.centralwidget)
         self.tabWidget.setObjectName(u"tabWidget")
         sizePolicy.setHeightForWidth(self.tabWidget.sizePolicy().hasHeightForWidth())
@@ -1126,8 +1127,79 @@ class Ui_Dengy(object):
         icon2 = QIcon()
         icon2.addFile(u"Image/calculate.ico", QSize(), QIcon.Normal, QIcon.Off)
         self.tabWidget.addTab(self.tab_2, icon2, "")
+        self.tab_3 = QWidget()
+        self.tab_3.setObjectName(u"tab_3")
+        self.horizontalLayout_5 = QHBoxLayout(self.tab_3)
+        self.horizontalLayout_5.setSpacing(6)
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.horizontalLayout_5.setContentsMargins(-1, -1, -1, 0)
+        self.verticalLayout_10 = QVBoxLayout()
+        self.verticalLayout_10.setSpacing(0)
+        self.verticalLayout_10.setObjectName(u"verticalLayout_10")
+        self.verticalLayout_10.setContentsMargins(0, -1, 0, 16)
+        self.tableWidget_kassa = QTableWidget(self.tab_3)
+        if (self.tableWidget_kassa.columnCount() < 3):
+            self.tableWidget_kassa.setColumnCount(3)
+        font3 = QFont()
+        font3.setPointSize(10)
+        __qtablewidgetitem = QTableWidgetItem()
+        __qtablewidgetitem.setFont(font3);
+        self.tableWidget_kassa.setHorizontalHeaderItem(0, __qtablewidgetitem)
+        __qtablewidgetitem1 = QTableWidgetItem()
+        __qtablewidgetitem1.setFont(font3);
+        self.tableWidget_kassa.setHorizontalHeaderItem(1, __qtablewidgetitem1)
+        __qtablewidgetitem2 = QTableWidgetItem()
+        __qtablewidgetitem2.setFont(font3);
+        self.tableWidget_kassa.setHorizontalHeaderItem(2, __qtablewidgetitem2)
+        self.tableWidget_kassa.setObjectName(u"tableWidget_kassa")
+        sizePolicy2.setHeightForWidth(self.tableWidget_kassa.sizePolicy().hasHeightForWidth())
+        self.tableWidget_kassa.setSizePolicy(sizePolicy2)
+        self.tableWidget_kassa.setMinimumSize(QSize(470, 498))
+        self.tableWidget_kassa.setMaximumSize(QSize(16777215, 16777215))
+        self.tableWidget_kassa.setStyleSheet(u"background-color: rgb(255, 255, 127);")
 
-        self.verticalLayout_28.addWidget(self.tabWidget)
+        self.verticalLayout_10.addWidget(self.tableWidget_kassa)
+
+        self.pushButton_save_exel = QPushButton(self.tab_3)
+        self.pushButton_save_exel.setObjectName(u"pushButton_save_exel")
+        sizePolicy.setHeightForWidth(self.pushButton_save_exel.sizePolicy().hasHeightForWidth())
+        self.pushButton_save_exel.setSizePolicy(sizePolicy)
+        self.pushButton_save_exel.setFont(font1)
+        self.pushButton_save_exel.setStyleSheet(u"QPushButton\n"
+"{\n"
+"}\n"
+"QPushButton:pressed\n"
+"{\n"
+"	background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:1 rgba(0, 26, 255, 113));\n"
+"    border-style: ridge;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;     \n"
+"}\n"
+"QPushButton:hover:!pressed\n"
+"{\n"
+"	background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:1 rgba(0, 88, 248, 77));\n"
+"    border-style: ridge;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;	\n"
+"}\n"
+"")
+
+        self.verticalLayout_10.addWidget(self.pushButton_save_exel, 0, Qt.AlignHCenter)
+
+
+        self.horizontalLayout_5.addLayout(self.verticalLayout_10)
+
+        icon3 = QIcon()
+        icon3.addFile(u"Image/Kassa.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.tabWidget.addTab(self.tab_3, icon3, "")
+
+        self.verticalLayout_11.addWidget(self.tabWidget)
+
+        self.verticalLayout_8 = QVBoxLayout()
+        self.verticalLayout_8.setSpacing(6)
+        self.verticalLayout_8.setObjectName(u"verticalLayout_8")
+
+        self.verticalLayout_11.addLayout(self.verticalLayout_8)
 
         Dengy.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(Dengy)
@@ -1223,5 +1295,13 @@ class Ui_Dengy(object):
         self.pushButton_vnesti_3.setText(QCoreApplication.translate("Dengy", u"\u0412\u043d\u0435\u0441\u0442\u0438 \u0434\u0430\u043d\u043d\u044b\u0435", None))
         self.pushButton_cancel_3.setText(QCoreApplication.translate("Dengy", u"\u041e\u0442\u043c\u0435\u043d\u0430", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("Dengy", u"\u0412\u0435\u0434\u043e\u043c\u043e\u0441\u0442\u044c", None))
+        ___qtablewidgetitem = self.tableWidget_kassa.horizontalHeaderItem(0)
+        ___qtablewidgetitem.setText(QCoreApplication.translate("Dengy", u"\u0424\u0418\u041e", None));
+        ___qtablewidgetitem1 = self.tableWidget_kassa.horizontalHeaderItem(1)
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("Dengy", u"\u0414\u043e\u043b\u0436\u043d\u043e\u0441\u0442\u044c", None));
+        ___qtablewidgetitem2 = self.tableWidget_kassa.horizontalHeaderItem(2)
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("Dengy", u"\u0421\u0443\u043c\u043c\u0430", None));
+        self.pushButton_save_exel.setText(QCoreApplication.translate("Dengy", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c \u0432 EXEL", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("Dengy", u"\u041a\u0430\u0441\u0441\u0430", None))
     # retranslateUi
 
